@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Simulation Results</h1>
+
+  
+
+  <div class="results" *ngIf="lines && lines.length">
+    <table>
+      <tr *ngFor="let line of lines">
+        <td colspan="3">{{ line }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <p *ngIf="!lines || lines.length === 0">No results to display.</p>
+
+  <a routerLink="/">← Run Another Simulation</a>
+</div>

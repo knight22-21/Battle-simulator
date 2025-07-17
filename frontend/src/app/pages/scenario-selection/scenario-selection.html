@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>Select Scenario</h1>
+
+  <div *ngIf="loading">Loading scenarios...</div>
+  <div *ngIf="error">{{ error }}</div>
+
+  <form *ngIf="!loading && !error" (ngSubmit)="onSubmit()" #scenarioForm="ngForm">
+    <label for="scenario">Scenario:</label>
+    <select
+      id="scenario"
+      name="scenario"
+      [(ngModel)]="selectedScenario"
+      required
+    >
+      <option *ngFor="let scenario of scenarios" [value]="scenario">
+        {{ scenario.replace('_', ' ') | titlecase }}
+      </option>
+    </select>
+
+    <button type="submit" [disabled]="!scenarioForm.form.valid">Next</button>
+  </form>
+</div>
