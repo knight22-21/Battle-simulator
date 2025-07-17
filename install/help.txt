@@ -210,3 +210,230 @@ python app.py
 ---
 
 Would you like me to generate the `README-OFFLINE-INSTALL.md` for you based on your current project details?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+You're **very close** — you’ve already prepared most of the essential components for your **offline DRDO deployment**.
+
+Let me walk you through a final checklist and the exact steps to **set up your project completely offline**:
+
+---
+
+## ✅ Your Current Files — Great So Far
+
+| File / Folder             | Purpose                     | Status |
+| ------------------------- | --------------------------- | ------ |
+| `python-3.13.0-amd64.exe` | Installs Python             | ✅      |
+| `node-v22.17.1-x64.msi`   | Installs Node.js            | ✅      |
+| `angular-cli-20.1.1.tgz`  | Angular CLI offline package | ✅      |
+| `frontend-0.0.0.tgz`      | Your Angular app (tarball)  | ✅      |
+| `offline-packages/`       | Python wheels for backend   | ✅      |
+
+---
+
+## 📝 What You Still Need to Add
+
+1. ✅ **`backend/requirements.txt`** — Already done. Make sure it's clean/minimal.
+2. ✅ **Install scripts or `README-OFFLINE-INSTALL.md`** — You need to write this.
+3. ✅ **Backend code** in `backend/` folder (main `.py` files, `main.py`, `app.py`, etc.)
+4. ⚠️ **(Optional but Recommended)** Add:
+
+   * `start-backend.bat` (or `.sh`)
+   * `start-frontend.bat` (or `.sh`)
+
+---
+
+## 📄 Create `README-OFFLINE-INSTALL.md`
+
+Here’s a **template you can use** for your README:
+
+---
+
+### 📦 DRDO Offline Deployment Instructions
+
+#### 🔧 1. Install Prerequisites
+
+1. **Install Python**
+
+   * Run: `python-3.13.0-amd64.exe`
+   * Enable: ✅ “Add Python to PATH”
+
+2. **Install Node.js**
+
+   * Run: `node-v22.17.1-x64.msi`
+   * Confirm: `node -v`, `npm -v` in terminal
+
+---
+
+#### 🌐 2. Setup Angular CLI
+
+1. Open terminal
+2. Run:
+
+   ```bash
+   npm install -g angular-cli-20.1.1.tgz
+   ```
+
+---
+
+#### 🖥️ 3. Set Up Frontend
+
+1. Extract the frontend app:
+
+   ```bash
+   tar -xvzf frontend-0.0.0.tgz
+   cd frontend
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install --offline
+   ```
+
+3. Run Angular app:
+
+   ```bash
+   ng serve --host 0.0.0.0
+   ```
+
+---
+
+#### 🧪 4. Set Up Backend
+
+1. Go to backend folder:
+
+   ```bash
+   cd backend
+   ```
+
+2. Install dependencies **offline**:
+
+   ```bash
+   pip install --no-index --find-links=offline-packages -r requirements.txt
+   ```
+
+3. Run the backend server:
+
+   ```bash
+   uvicorn main:app --host 0.0.0.0 --port 8000
+   ```
+
+---
+
+### ✅ You're Done!
+
+Your Angular app will run on: `http://localhost:4200`
+Your FastAPI backend will run on: `http://localhost:8000`
+
+---
+
+## 🧰 (Optional) Add These Two Scripts
+
+### `start-frontend.bat`:
+
+```bat
+@echo off
+cd frontend
+npm install --offline
+ng serve --host 0.0.0.0
+```
+
+### `start-backend.bat`:
+
+```bat
+@echo off
+cd backend
+pip install --no-index --find-links=offline-packages -r requirements.txt
+uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
+---
+
+## ✅ Final Folder Structure
+
+```
+DRDO-offline-deploy/
+├── python-3.13.0-amd64.exe
+├── node-v22.17.1-x64.msi
+├── angular-cli-20.1.1.tgz
+├── frontend-0.0.0.tgz
+├── backend/
+│   ├── main.py (or app.py)
+│   ├── requirements.txt
+│   └── offline-packages/
+├── README-OFFLINE-INSTALL.md
+├── start-frontend.bat
+└── start-backend.bat
+```
+
+---
+
+Would you like me to generate the `README-OFFLINE-INSTALL.md` or script files automatically for your current folder?
